@@ -9,7 +9,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -35,10 +37,31 @@ fun MyButton(
             backgroundColor = backgroundColor
         )
     ) {
-        Row(modifier = Modifier.fillMaxWidth().padding(0.dp), horizontalArrangement = SpaceBetween) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = SpaceBetween
+        ) {
             Text(text = text, color = textColor)
             Icon(imageVector = leftIcon, contentDescription = leftIconContentDescription)
         }
+    }
+}
+
+@Composable
+fun BackButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+    color: Color = MaterialTheme.colors.primary
+) {
+    IconButton(
+        modifier = modifier,
+        onClick = onClick
+    ) {
+        Icon(
+            imageVector = Icons.Rounded.ArrowBack,
+            contentDescription = "Back button",
+            tint = color
+        )
     }
 }
 

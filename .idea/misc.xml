@@ -8,12 +8,18 @@
         <entry key="../../../../../layout/compose-model-1652276023701.xml" value="0.5" />
         <entry key="../../../../../layout/compose-model-1652276308691.xml" value="1.0" />
         <entry key="../../../../../layout/compose-model-1652276653809.xml" value="0.31398809523809523" />
+        <entry key="../../../../../layout/compose-model-1652354096648.xml" value="0.19537037037037036" />
+        <entry key="../../../../../layout/compose-model-1652357463350.xml" value="0.1" />
         <entry key="../../../../layout/compose-model-1652123974169.xml" value="0.19214527027027026" />
         <entry key="../../../../layout/compose-model-1652191933246.xml" value="0.32222222222222224" />
         <entry key="../../../../layout/compose-model-1652192283329.xml" value="0.25" />
         <entry key="../../../../layout/compose-model-1652192847625.xml" value="0.19130067567567569" />
         <entry key="../../../../layout/compose-model-1652192862025.xml" value="0.25" />
         <entry key="../../../../layout/compose-model-1652194436450.xml" value="0.28703703703703703" />
+        <entry key="app/src/main/res/drawable/ic_non_veg_sym.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/ic_veg_sym.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/ring_green.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/ring_red.xml" value="0.178" />
       </map>
     </option>
   </component>

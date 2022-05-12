@@ -19,9 +19,10 @@ fun TitleText(
     textColor: Color,
 ) {
     Text(
+        modifier = modifier,
         text = text,
         color = textColor,
-        style = MaterialTheme.typography.h4.copy(
+        style = MaterialTheme.typography.h5.copy(
             fontWeight = FontWeight(400)
         )
     )

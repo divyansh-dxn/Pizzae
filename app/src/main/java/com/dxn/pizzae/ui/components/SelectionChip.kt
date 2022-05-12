@@ -44,7 +44,7 @@ fun SelectionChipRow(
                         CircleShape
                     )
                     .clickable { onSelect(index) }
-                    .padding(8.dp)
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
             ) {
                 Text(
                     modifier = Modifier.padding(4.dp),
