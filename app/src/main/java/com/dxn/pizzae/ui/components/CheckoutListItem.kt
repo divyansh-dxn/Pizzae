@@ -103,7 +103,7 @@ fun Previie() {
         priceEach = 290.4f,
         desc = "Hand-Tossed | L",
         isVeg = false,
-        count = 0
+        count = 1
     )
     CheckoutListItem(item = item, count = count, onCountChange = { count = it })
 }

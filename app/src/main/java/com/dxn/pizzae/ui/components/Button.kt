@@ -27,6 +27,7 @@ fun MyButton(
     text: String,
     leftIcon: ImageVector,
     leftIconContentDescription: String,
+    enabled:Boolean = true,
     onClick: () -> Unit
 ) {
     Button(
@@ -35,7 +36,8 @@ fun MyButton(
         shape = CircleShape,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = backgroundColor
-        )
+        ),
+        enabled = enabled
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
