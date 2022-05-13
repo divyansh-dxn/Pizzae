@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val viewModel by viewModels<MainViewModel>()
-            val cartItems by remember { viewModel.cartItems }
+
             val navController = rememberNavController()
 
             Surface(
@@ -34,18 +34,12 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navController, startDestination = "description") {
                     composable("description") {
                         PizzaDesc(navController, pizza = getFakePizza(this@MainActivity)) { item ->
-                            if (!cartItems.map { it.id }.contains(item.id))
+                            if (!viewModel.cartItems.map { it.id }.contains(item.id))
                                 viewModel.addToCart(item)
                         }
                     }
                     composable("cart") {
-                        CheckoutScreen(
-                            navController = navController,
-                            pizzas = cartItems,
-                            updateQuantity = { id, qty ->
-                                viewModel.updateQuantity(id, qty)
-                            }
-                        )
+                        CheckoutScreen(navController, viewModel)
                     }
                 }
             }

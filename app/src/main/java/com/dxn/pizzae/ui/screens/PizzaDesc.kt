@@ -38,8 +38,8 @@ fun PizzaDesc(
 ) {
     var crust by remember { mutableStateOf(0) }
     var size by remember { mutableStateOf(0) }
-    val statusBarColor = MaterialTheme.colors.primaryVariant
 
+    val statusBarColor = MaterialTheme.colors.primaryVariant
     val systemUiController = rememberSystemUiController()
     SideEffect {
         systemUiController.setStatusBarColor(statusBarColor)
@@ -58,7 +58,7 @@ fun PizzaDesc(
                         modifier = Modifier
                             .padding(8.dp)
                             .align(Alignment.TopStart),
-                        onClick = { navController.popBackStack() }
+                        onClick = { }
                     )
                     Image(
                         modifier = Modifier
