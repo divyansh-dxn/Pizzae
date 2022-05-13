@@ -20,81 +20,83 @@ import com.dxn.pizzae.ui.components.MyButton
 import com.dxn.pizzae.ui.components.TitleText
 import com.dxn.pizzae.ui.main.MainViewModel
 import com.dxn.pizzae.ui.theme.GrayBlue
+import com.dxn.pizzae.ui.theme.PizzaeTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun CheckoutScreen(
     navController: NavController,
     viewModel: MainViewModel
 ) {
-    var pizzas = remember { viewModel.cartItems }
-
-    Scaffold(topBar = {
-        TopAppBar(
-            title = {
-                TitleText(text = "Shopping Cart", textColor = GrayBlue)
-            },
-            navigationIcon = {
-                IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(
-                        imageVector = Icons.Rounded.ArrowBack,
-                        contentDescription = "navigation Icon",
-                        tint = GrayBlue
-                    )
-                }
-            },
-            backgroundColor = MaterialTheme.colors.surface,
-            elevation = 0.dp
-        )
-    }) {
-        Column(Modifier.fillMaxSize()) {
-            LazyColumn(
-                Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            ) {
-                item {
-                    DescText(
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp),
-                        text = "${5} items in your cart",
-                        textColor = GrayBlue
-                    )
-                }
-                itemsIndexed(pizzas) { index, item ->
-                    var count by remember { mutableStateOf(item.count) }
-                    CheckoutListItem(
-                        item = item,
-                        count = count,
-                        onCountChange = { newCount ->
-                            count = newCount
-                            viewModel.updateQuantity(index, count)
-                        })
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
+    val pizzas = remember { viewModel.cartItems }
+    PizzaeTheme {
+        val statusBarColor = MaterialTheme.colors.surface
+        val systemUiController = rememberSystemUiController()
+        SideEffect {
+            systemUiController.apply {
+                setSystemBarsColor(statusBarColor,darkIcons = true)
             }
-            MyButton(
-                modifier = Modifier.padding(16.dp),
-                backgroundColor = GrayBlue,
-                textColor = Color.White,
-                text = "Checkout",
-                leftIcon = Icons.Rounded.ArrowForward,
-                leftIconContentDescription = "Checkout"
-            ) {
+        }
+        Scaffold(topBar = {
+            TopAppBar(
+                title = {
+                    TitleText(text = "Shopping Cart", textColor = GrayBlue)
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.Rounded.ArrowBack,
+                            contentDescription = "navigation Icon",
+                            tint = GrayBlue
+                        )
+                    }
+                },
+                backgroundColor = MaterialTheme.colors.surface,
+                elevation = 0.dp
+            )
+        }) {
+            Column(Modifier.fillMaxSize()) {
+                LazyColumn(
+                    Modifier
+                        .padding(8.dp)
+                        .weight(1f)
+                ) {
+                    item {
+                        DescText(
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp),
+                            text = "${5} items in your cart",
+                            textColor = GrayBlue
+                        )
+                    }
+                    itemsIndexed(pizzas) { index, item ->
+                        var count by remember { mutableStateOf(item.count) }
+                        CheckoutListItem(
+                            item = item,
+                            count = count,
+                            onCountChange = { newCount ->
+                                if (newCount == 0) {
+                                    viewModel.removeFromCart(item)
+                                } else {
+                                    count = newCount
+                                    viewModel.updateQuantity(index, count)
+                                }
+                            })
+                        Spacer(modifier = Modifier.height(16.dp))
+                    }
+                }
+                MyButton(
+                    modifier = Modifier.padding(16.dp),
+                    backgroundColor = GrayBlue,
+                    textColor = Color.White,
+                    text = "Checkout",
+                    leftIcon = Icons.Rounded.ArrowForward,
+                    leftIconContentDescription = "Checkout"
+                ) {
 
+                }
             }
         }
     }
-}
 
-@Preview
-@Composable
-fun CartPreview() {
-    val context = LocalContext.current
-//    PizzaeTheme {
-//        CheckoutScreen(navController = rememberNavController(), pizzas = MutableList(3) {
-//            fakeCartItem
-//        }, updateQuantity = { id, qty ->
-//            Toast.makeText(context, "CLICKED", Toast.LENGTH_SHORT).show()
-//        }
-//        )
-//    }
+
 }

@@ -38,14 +38,14 @@ fun PizzaDesc(
 ) {
     var crust by remember { mutableStateOf(0) }
     var size by remember { mutableStateOf(0) }
+    PizzaeTheme(isVeg = false) {
 
-    val statusBarColor = MaterialTheme.colors.primaryVariant
-    val systemUiController = rememberSystemUiController()
-    SideEffect {
-        systemUiController.setStatusBarColor(statusBarColor)
-    }
+        val statusBarColor = MaterialTheme.colors.primaryVariant
+        val systemUiController = rememberSystemUiController()
+        SideEffect {
+            systemUiController.setStatusBarColor(statusBarColor)
+        }
 
-    PizzaeTheme(isVeg = pizza.isVeg) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             item {
                 Box(

@@ -15,6 +15,6 @@ fun getFakePizza(context: Context) = Pizza(
     crusts = listOf(fakeCrust1, fakeCrust2),
     defaultCrust = 1,
     description = context.getString(R.string.dummy_desc),
-    name = "Non-veg Pizza",
+    name = "Non-Veg Pizza",
     isVeg = false
 )
