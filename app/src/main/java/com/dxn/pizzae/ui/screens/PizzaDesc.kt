@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.dxn.pizzae.R
+import com.dxn.pizzae.data.models.CartItem
 import com.dxn.pizzae.data.models.Pizza
 import com.dxn.pizzae.data.models.getFakePizza
 import com.dxn.pizzae.ui.components.*
@@ -163,7 +164,16 @@ fun PizzaDesc(
                     leftIcon = Icons.Rounded.ArrowForward,
                     leftIconContentDescription = "Add to cart"
                 ) {
-
+                    val selectedCrust = pizza.crusts[crust]
+                    val selectedSize = selectedCrust.sizes[size]
+                    val cartItem = CartItem(
+                        name = pizza.name,
+                        desc = "${selectedCrust.name} | ${selectedSize.name}",
+                        priceEach = selectedSize.price,
+                        count = 1,
+                        isVeg = pizza.isVeg
+                    )
+                    // save the pizza to
                 }
             }
         }

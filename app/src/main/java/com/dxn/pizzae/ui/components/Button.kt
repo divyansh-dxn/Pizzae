@@ -42,7 +42,7 @@ fun MyButton(
             horizontalArrangement = SpaceBetween
         ) {
             Text(text = text, color = textColor)
-            Icon(imageVector = leftIcon, contentDescription = leftIconContentDescription)
+            Icon(imageVector = leftIcon, contentDescription = leftIconContentDescription, tint = textColor)
         }
     }
 }

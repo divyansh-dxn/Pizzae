@@ -35,6 +35,7 @@ fun DescText(
     textColor: Color
 ) {
     Text(
+        modifier = modifier,
         text = text,
         color = textColor,
         style = MaterialTheme.typography.body1
