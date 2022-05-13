@@ -13,11 +13,3 @@ data class CartItem(
         return name == other.name && isVeg == other.isVeg && desc == other.desc
     }
 }
-
-val fakeCartItem = CartItem(
-    name = "Non-Veg Pizza",
-    priceEach = 290.4f,
-    desc = "Hand-Tossed | L",
-    isVeg = false,
-    count = 1
-)

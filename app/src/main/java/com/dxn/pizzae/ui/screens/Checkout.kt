@@ -10,8 +10,6 @@ import androidx.compose.material.icons.rounded.ArrowForward
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.dxn.pizzae.ui.components.CheckoutListItem
@@ -29,12 +27,14 @@ fun CheckoutScreen(
     viewModel: MainViewModel
 ) {
     val pizzas = remember { viewModel.cartItems }
+    var total by remember {viewModel.totalPrice}
+
     PizzaeTheme {
         val statusBarColor = MaterialTheme.colors.surface
         val systemUiController = rememberSystemUiController()
         SideEffect {
             systemUiController.apply {
-                setSystemBarsColor(statusBarColor,darkIcons = true)
+                setSystemBarsColor(statusBarColor, darkIcons = true)
             }
         }
         Scaffold(topBar = {
@@ -64,7 +64,7 @@ fun CheckoutScreen(
                     item {
                         DescText(
                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp),
-                            text = "${5} items in your cart",
+                            text = "${pizzas.size} items in your cart",
                             textColor = GrayBlue
                         )
                     }
@@ -73,15 +73,29 @@ fun CheckoutScreen(
                         CheckoutListItem(
                             item = item,
                             count = count,
-                            onCountChange = { newCount ->
-                                if (newCount == 0) {
+                            onIncrement = {
+                                count++
+                                viewModel.increaseQty(index)
+                            },
+                            onDecrement = {
+                                count--
+                                if(count==0) {
                                     viewModel.removeFromCart(item)
                                 } else {
-                                    count = newCount
-                                    viewModel.updateQuantity(index, count)
+                                    viewModel.decreaseQty(index)
                                 }
-                            })
+                            }
+                           )
                         Spacer(modifier = Modifier.height(16.dp))
+                    }
+                    item {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            TitleText(text = "Cart Total:", textColor = GrayBlue)
+                            TitleText(text = "₹$total", textColor = GrayBlue)
+                        }
                     }
                 }
                 MyButton(

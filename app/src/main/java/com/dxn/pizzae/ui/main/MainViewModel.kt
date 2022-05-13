@@ -1,27 +1,35 @@
 package com.dxn.pizzae.ui.main
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.dxn.pizzae.data.models.CartItem
-import kotlin.random.Random
 
 class MainViewModel : ViewModel() {
     val cartItems = mutableStateListOf<CartItem>()
+    val totalPrice = mutableStateOf(0f)
 
-    fun addToCart(cartItem: CartItem) = cartItems.add(cartItem)
-    fun removeFromCart(cartItem: CartItem) = cartItems.remove(cartItem)
+    fun addToCart(cartItem: CartItem) {
+        cartItems.add(cartItem)
+        totalPrice.value += cartItem.priceEach
+    }
 
-    fun updateQuantity(index: Int, qty: Int) {
-        val pre = cartItems[index]
-        val new = CartItem(
-            name = "Non-Veg Pizza",
-            priceEach = 290.4f,
-            desc = "Hand-Tossed | L",
-            isVeg = false,
-            count = qty
-        )
-        Log.d("TAG_TAG", "updateQuantity: $pre $new")
+    fun removeFromCart(cartItem: CartItem) {
+        totalPrice.value -= cartItem.priceEach
+        cartItems.remove(cartItem)
+    }
+
+    fun increaseQty(index: Int) {
+        val temp = cartItems[index]
+        totalPrice.value += temp.priceEach
+        val new = temp.copy(count = temp.count + 1)
+        cartItems[index] = new
+    }
+
+    fun decreaseQty(index: Int) {
+        val temp = cartItems[index]
+        totalPrice.value -= temp.priceEach
+        val new = temp.copy(count = temp.count - 1)
         cartItems[index] = new
     }
 }

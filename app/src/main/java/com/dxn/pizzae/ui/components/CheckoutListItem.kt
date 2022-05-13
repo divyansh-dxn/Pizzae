@@ -29,7 +29,8 @@ fun CheckoutListItem(
     item: CartItem,
     height: Dp = 84.dp,
     count: Int,
-    onCountChange: (Int) -> Unit
+    onIncrement: () -> Unit,
+    onDecrement: () -> Unit,
 ) {
     PizzaeTheme(isVeg = false) {
         Row(Modifier.height(height), verticalAlignment = Alignment.CenterVertically) {
@@ -87,8 +88,9 @@ fun CheckoutListItem(
             }
             Counter(
                 count = count,
-                onCountChange = onCountChange,
-                tint = MaterialTheme.colors.primary
+                tint = MaterialTheme.colors.primary,
+                onIncrement = onIncrement,
+                onDecrement = onDecrement
             )
         }
     }
@@ -105,5 +107,5 @@ fun Previie() {
         isVeg = false,
         count = 1
     )
-    CheckoutListItem(item = item, count = count, onCountChange = { count = it })
+//    CheckoutListItem(item = item, count = count, onCountChange = { count = it })
 }

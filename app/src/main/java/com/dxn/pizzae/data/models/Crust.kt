@@ -18,5 +18,5 @@ val fakeCrust2 = Crust(
     defaultSize = 1,
     id = 2,
     name = "Cheese-burst",
-    sizes = listOf(fakeSize2, fakeSize3)
+    sizes = listOf(fakeSize3, fakeSize4)
 )
